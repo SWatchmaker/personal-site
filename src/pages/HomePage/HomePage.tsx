@@ -9,9 +9,14 @@ import ProfilePicture, {
 import './homePage.scss';
 import PuzzleHead from '../../assets/icons/PuzzleHead';
 import Workbench from '../../assets/icons/Workbench';
+import { TranslationContext } from '../../contexts/TranslationContext';
 
 const HomePage = (): React.ReactElement => {
   const navigate = useNavigate();
+  const {
+    translation: { home },
+  } = useContext(TranslationContext);
+
   const profileImg = useRef<HTMLImageElement>(null);
   const motivationBox = useRef<HTMLDivElement>(null);
   const lookingForBox = useRef<HTMLDivElement>(null);
@@ -144,7 +149,7 @@ const HomePage = (): React.ReactElement => {
               scrollY > sectionsYPosition.motivations ? 'bgAnimIn' : 'bgAnimOut'
             } ${
               scrollY > sectionsYPosition.lookingFor
-                ? 'bgAnim1-1 right-1/2'
+                ? 'bgAnim1-1 right-0'
                 : 'bg-eva-purple/10 right-0'
             }`}
             style={{
@@ -157,7 +162,7 @@ const HomePage = (): React.ReactElement => {
               scrollY > sectionsYPosition.motivations ? 'bgAnimIn' : 'bgAnimOut'
             } ${
               scrollY > sectionsYPosition.lookingFor
-                ? 'bgAnim2-1 left-1/2'
+                ? 'bgAnim2-1 left-0'
                 : 'bg-eva-purple/10 left-0'
             }`}
             style={{
@@ -195,9 +200,11 @@ const HomePage = (): React.ReactElement => {
                     }`}
                     onAnimationEnd={() => setPostInitialAnim(true)}
                   >
-                    Soy un desarrollador informático{' '}
-                    <span className='text-turquoise'>autodidacta</span>,
-                    apasionado por la tecnología y la música.
+                    {home.presentation.main.text1}{' '}
+                    <span className='text-turquoise'>
+                      {home.presentation.main.highlight1}
+                    </span>
+                    {home.presentation.main.text2}
                   </p>
                   <p
                     className={`m-auto text-md lg:text-lg font-code font-semibold max-w-[80%] md:max-w-[60%] lg:max-w-[50%] animate__animated ${
@@ -206,10 +213,11 @@ const HomePage = (): React.ReactElement => {
                         : 'animate__fadeOutUp'
                     }`}
                   >
-                    Ingeniero en <span className='text-turquoise'>Sonido</span>{' '}
-                    de profesión, elegí abrirme paso entre editores de texto y
-                    bugs infinitos debido a mi afinidad natural con el área y la
-                    extensión del campo laboral.{' '}
+                    {home.presentation.sub.text1}{' '}
+                    <span className='text-turquoise'>
+                      {home.presentation.sub.highlight1}
+                    </span>{' '}
+                    {home.presentation.sub.text2}
                   </p>
                 </div>
               </div>
@@ -229,7 +237,7 @@ const HomePage = (): React.ReactElement => {
                   <span
                     className={`with-underline pb-2 uppercase relative mb-4 font-semibold after:bg-turquoise`}
                   >
-                    Motivación
+                    {home.motivations.title}
                   </span>
                   <p
                     className={`text-2xl lg:text-3xl font-code font-semibold max-w-[70%] animate__animated ${
@@ -239,10 +247,16 @@ const HomePage = (): React.ReactElement => {
                         : 'animate__fadeOutRight'
                     }`}
                   >
-                    Que mi trabajo, sea cual sea, esté caracterizado por su
-                    <span className='text-turquoise'> calidad</span> y{' '}
-                    <span className='text-turquoise'>creatividad</span> de
-                    ejecución.
+                    {home.motivations.main.text1}
+                    <span className='text-turquoise'>
+                      {' '}
+                      {home.motivations.main.highlight1}
+                    </span>{' '}
+                    {home.motivations.main.text2}{' '}
+                    <span className='text-turquoise'>
+                      {home.motivations.main.highlight2}
+                    </span>{' '}
+                    {home.motivations.main.text3}
                   </p>
                   <p
                     className={`text-md lg:text-lg font-code font-semibold max-w-[50%] animate__animated ${
@@ -252,11 +266,11 @@ const HomePage = (): React.ReactElement => {
                         : 'animate__fadeOutLeft'
                     }`}
                   >
-                    Soy un convencido de que el ascenso laboral es un fruto
-                    automático del{' '}
-                    <span className='text-turquoise'>perfeccionamiento</span>,
-                    por lo que busco mantenerme en aprendizaje constante dentro
-                    de mi área.
+                    {home.motivations.sub.text1}{' '}
+                    <span className='text-turquoise'>
+                      {home.motivations.sub.highlight1}
+                    </span>
+                    {home.motivations.sub.text2}
                   </p>
                 </div>
                 <div
@@ -285,7 +299,7 @@ const HomePage = (): React.ReactElement => {
                   <span
                     className={`with-underline pb-2 uppercase relative mb-4 font-semibold after:bg-eva-purple-light`}
                   >
-                    Qué busco
+                    {home.lookingFor.title}
                   </span>
                   <p
                     className={`text-2xl lg:text-3xl font-code font-semibold max-w-[70%] animate__animated ${
@@ -294,12 +308,12 @@ const HomePage = (): React.ReactElement => {
                         : 'animate__fadeOutLeft'
                     }`}
                   >
-                    Que los desafíos en mi entorno de trabajo fomementen mi
+                    {home.lookingFor.main.text1}
                     <span className='text-eva-purple-light'>
                       {' '}
-                      crecimiento
+                      {home.lookingFor.main.highlight1}
                     </span>{' '}
-                    profesional.
+                    {home.lookingFor.main.text2}
                   </p>
                   <p
                     className={`text-md lg:text-lg font-code font-semibold max-w-[50%] animate__animated ${
@@ -308,12 +322,17 @@ const HomePage = (): React.ReactElement => {
                         : 'animate__fadeOutRight'
                     }`}
                   >
-                    Me interesa ser parte de un equipo donde el
-                    &quot;desafío&quot; también esté asociado a la exploración
-                    de{' '}
-                    <span className='text-eva-purple-light'> metodologías</span>{' '}
-                    y<span className='text-eva-purple-light'> tecnologías</span>{' '}
-                    más eficientes.
+                    {home.lookingFor.sub.text1}{' '}
+                    <span className='text-eva-purple-light'>
+                      {' '}
+                      {home.lookingFor.sub.highlight1}
+                    </span>{' '}
+                    y
+                    <span className='text-eva-purple-light'>
+                      {' '}
+                      {home.lookingFor.sub.highlight2}
+                    </span>{' '}
+                    {home.lookingFor.sub.text3}
                   </p>
                 </div>
                 <div

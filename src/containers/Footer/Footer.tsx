@@ -1,14 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import Atom from '../../components/Atom/Atom';
 import GlobalContext from '../../contexts/GlobalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { LEFT_ELEMENTS, RIGHT_ELEMENTS } from './utils';
+import elementsFactory from './utils';
 import './footer.scss';
+import { TranslationContext } from '../../contexts/TranslationContext';
 
 const Footer = (): React.ReactElement => {
   const { scrollY } = useContext(GlobalContext);
   const [loadInit, setLoadInit] = useState(false);
   const [show, setShow] = useState(false);
+
+  const {
+    translation: { footer },
+    language,
+  } = useContext(TranslationContext);
+
+  const { LEFT_ELEMENTS, RIGHT_ELEMENTS } = useMemo(
+    () => elementsFactory(footer.elementNames),
+    [language]
+  );
 
   useEffect(() => {
     if (
@@ -33,7 +44,7 @@ const Footer = (): React.ReactElement => {
       {loadInit && (
         <div className='h-full max-w-screen-lg mx-auto px-6'>
           <div
-            className={`absolute -ml-24 left-1/2 top-1/3 animate__animated animate__fast ${
+            className={`hidden sm:block absolute -ml-24 left-1/2 top-1/3 animate__animated animate__fast ${
               show ? 'animate__fadeInUp' : 'animate__fadeOutDown'
             }`}
           >
@@ -41,14 +52,14 @@ const Footer = (): React.ReactElement => {
               <Atom />
             </div>
           </div>
-          <div className='flex justify-between pb-12 h-full'>
-            <div className='flex flex-col justify-end'>
+          <div className='flex flex-col sm:flex-row justify-between pb-12 h-full'>
+            <div className='flex flex-col justify-end items-center sm:items-start mb-4 sm:mb-0'>
               <span
                 className={`color-slate-50 text-xl mb-4 ml-1 relative animate__animated ${
                   show ? 'animate__fadeInLeft' : 'animate__fadeOutRight'
                 }`}
               >
-                MIS REDES
+                {footer.networks}
               </span>
               {LEFT_ELEMENTS.map(
                 ({ animDelay, color, href, icon, text }, i) => (
@@ -75,13 +86,13 @@ const Footer = (): React.ReactElement => {
                 )
               )}
             </div>
-            <div className='flex flex-col justify-end'>
+            <div className='flex flex-col justify-end items-center sm:items-end'>
               <span
-                className={`color-slate-50 text-xl mb-4 ml-1 relative text-right w-full animate__animated ${
+                className={`color-slate-50 text-xl mb-4 ml-1 relative text-center sm:text-right w-full animate__animated ${
                   show ? 'animate__fadeInRight' : 'animate__fadeOutLeft'
                 }`}
               >
-                REDES INFORMALES
+                {footer.informalNetworks}
               </span>
               {RIGHT_ELEMENTS.map(
                 ({ animDelay, color, href, icon, text }, i) => (
