@@ -1,0 +1,135 @@
+@import '../../styles/settings';
+
+@keyframes bgAnimIn1 {
+  100% {
+    transform: skew(0deg, 6deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bgAnimIn2 {
+  100% {
+    transform: skew(0deg, -6deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bgAnimIn1-1 {
+  100% {
+    transform: skew(0deg, -10deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bgAnimIn2-1 {
+  100% {
+    transform: skew(0deg, 10deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bgAnimOut1 {
+  0% {
+    transform: skew(0deg, 6deg);
+    opacity: 1;
+  }
+  100% {
+    transform: skew(0deg, 0deg);
+    opacity: 0;
+  }
+}
+@keyframes bgAnimOut2 {
+  0% {
+    transform: skew(0deg, -6deg);
+    opacity: 1;
+  }
+  100% {
+    transform: skew(0deg, 0deg);
+    opacity: 0;
+  }
+}
+
+.bgAnim1 {
+  animation: bgAnimIn1 1s forwards;
+}
+.bgAnim2 {
+  animation: bgAnimIn2 1s forwards;
+}
+
+.bgAnim1-1 {
+  animation: bgAnimIn1-1 1s forwards;
+  background: linear-gradient(
+    90deg,
+    rgba(#333333, 0.1) 0%,
+    rgba($turquesa, 0.1) 70%,
+    rgba($turquesa, 0.2) 100%
+  );
+}
+.bgAnim2-1 {
+  animation: bgAnimIn2-1 1s forwards;
+  background: linear-gradient(
+    90deg,
+    rgba($turquesa, 0.2) 0%,
+    rgba($turquesa, 0.1) 70%,
+    rgba(#333333, 0.1) 100%
+  );
+}
+
+.bgAnim1.bgAnimOut {
+  animation: bgAnimOut1 1s;
+}
+.bgAnim2.bgAnimOut {
+  animation: bgAnimOut2 1s;
+}
+
+.with-underline {
+  //UNDERLINE
+  &:before,
+  &:after {
+    content: '';
+    opacity: 1;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+}
+
+.textIconBox__icon {
+  &:after {
+    content: '';
+    opacity: 0.3;
+    position: absolute;
+    bottom: -3rem;
+    left: 0;
+    right: 0;
+    height: 10px;
+    border-radius: 50%;
+    filter: blur(5px);
+  }
+}
+
+#lookingFor {
+  g {
+    fill: $eva-purple-l;
+  }
+}
+
+@keyframes swinging {
+  0% {
+    bottom: 25px;
+  }
+  50% {
+    bottom: 10px;
+  }
+  100% {
+    bottom: 25px;
+  }
+}
+
+.home__downArrow {
+  svg {
+    animation: swinging 1s ease-in-out infinite;
+  }
+}

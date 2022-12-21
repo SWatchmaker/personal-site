@@ -1,0 +1,133 @@
+@import '../../styles/settings';
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotating0 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.welcomePage {
+  .atom-container {
+    transition: transform 1s linear;
+  }
+  .rollIcon {
+    transition: top linear, left linear, transform linear, height ease-in;
+    svg {
+      transition: all 0.5s linear;
+    }
+  }
+  .welcomePage__rollIcon--circle {
+    @extend .rollIcon;
+    height: 400px;
+    top: calc(50% - 200px) !important;
+    left: calc(50% - 20px) !important;
+    .fa-node-js {
+      color: #68a063;
+    }
+    .fa-html5 {
+      color: #e44d26;
+    }
+    .fa-react {
+      color: #61dafb;
+    }
+    .fa-css3-alt {
+      color: #2965f1;
+    }
+  }
+}
+
+.loader--inactive {
+  .atom-container {
+    animation: rotating0 1s ease forwards;
+    > div {
+      &:first-of-type {
+        &:after {
+          background: darken($eva-purple, 22%);
+          box-shadow: 0 0 25px darken($eva-purple, 22%);
+        }
+      }
+
+      > div {
+        &:after {
+          box-shadow: 0 0 12px darken($eva-purple, 22%);
+          background-color: darken($eva-purple, 22%);
+        }
+      }
+    }
+  }
+}
+
+.goInButton {
+  box-shadow: inset 0 0 0 2px $off-white;
+  color: $off-white;
+  transition: all 0.3s linear;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  // And this the bottom & left borders (expands left, then up)
+  &::after {
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+  }
+  // Hover styles
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover::before {
+    border-top-color: $turquesa; // Make borders visible
+    border-right-color: $turquesa;
+    transition: width 0.25s ease-out,
+      // Width expands first
+      height 0.25s ease-out 0.25s; // And then height
+  }
+
+  &:hover::after {
+    border-bottom-color: $turquesa; // Make borders visible
+    border-left-color: $turquesa;
+    transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
+  }
+}
+
+.disabled {
+  cursor: default;
+  box-shadow: inset 0 0 0 2px darken($eva-purple, 22%);
+  color: darken($eva-purple, 22%);
+}
+
+.rollIcon {
+  transition: top linear, left linear, transform linear, height ease-in;
+  svg {
+    transition: all 0.5s linear;
+    color: darken($eva-purple, 22%);
+  }
+}

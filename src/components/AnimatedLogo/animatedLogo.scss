@@ -1,0 +1,7 @@
+@import '../../styles/settings';
+
+.navbar-brand {
+  --animate-duration: 0.3s;
+  --animate-delay: 0.2s;
+  transition: all 0.3s;
+}

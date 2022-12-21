@@ -1,0 +1,26 @@
+@import '../../styles/settings';
+
+.rsIcon {
+  --animate-duration: 0.3s;
+}
+
+.rsIcon + .rsIcon {
+  margin-left: 10px;
+}
+
+#contactText {
+  transition: all 0.3s;
+  --animate-duration: 0.3s;
+}
+
+#mailIcon {
+  --animate-delay: 0.2s;
+}
+
+#ldIcon {
+  --animate-delay: 0.4s;
+}
+
+#gitIcon {
+  --animate-delay: 0.6s;
+}
