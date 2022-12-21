@@ -6,6 +6,8 @@ import { IconPosition, iconElements, createPos } from './utils';
 import { useNavigate } from '@tanstack/react-location';
 
 import './welcomePage.scss';
+import LanguageSelector from '../../components/LanguageSelector/LanguageSelector';
+import { TranslationContext } from '../../contexts/TranslationContext';
 
 const OBJECT_BASE_POSITION: IconPosition = {
   top: 50,
@@ -16,6 +18,10 @@ const OBJECT_BASE_POSITION: IconPosition = {
 
 const WelcomPage = (): React.ReactElement => {
   const navigate = useNavigate();
+  const {
+    translation: { welcome },
+  } = useContext(TranslationContext);
+
   const rotationAngleSection = 220 / 5;
   const angleStart = 250;
 
@@ -100,6 +106,9 @@ const WelcomPage = (): React.ReactElement => {
         ['--animate-delay' as any]: '0.8s',
       }}
     >
+      <div className='absolute top-2 right-2 z-50'>
+        <LanguageSelector />
+      </div>
       <div
         className='relative h-full w-full'
         id='bounceContainer'
@@ -171,7 +180,7 @@ const WelcomPage = (): React.ReactElement => {
           toHome();
         }}
       >
-        <span className='tracking-wide'>Bienvenid@</span>
+        <span className='tracking-wide'>{welcome.button}</span>
       </div>
     </div>
   );

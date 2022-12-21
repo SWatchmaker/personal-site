@@ -43,7 +43,7 @@ const CONTACT_ICONS: IContactIcons[] = [
   },
 ];
 
-const ContactBox = (): React.ReactElement => {
+const ContactBox = ({ text }: { text: string }): React.ReactElement => {
   const [animationOn, setAnimationOn] = useState(false);
   const [displayIcons, setDisplayIcons] = useState(false);
 
@@ -98,7 +98,7 @@ const ContactBox = (): React.ReactElement => {
           if (animationOn) setDisplayIcons(true);
         }}
       >
-        <span>CONTACTO</span>
+        <span>{text}</span>
       </div>
     </div>
   );
