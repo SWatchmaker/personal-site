@@ -12,13 +12,18 @@ export const TranslationContext = createContext<ITranslationContext>({
   translation: AllTranslations.ES,
 });
 
+const isSpanish = (): boolean =>
+  ['es-ES', 'es'].includes(window.navigator.language);
+
 export const TranslationContextProvider = ({
   children,
 }: React.PropsWithChildren): React.ReactElement => {
   const [translation, setTranslation] = useState<TTranslation>(
-    AllTranslations.ES
+    isSpanish() ? AllTranslations.ES : AllTranslations.EN
   );
-  const [language, setLanguage] = useState<Languages>('ES');
+  const [language, setLanguage] = useState<Languages>(
+    isSpanish() ? 'ES' : 'EN'
+  );
 
   const setTranslationByCode = (language: Languages): void => {
     const translation = AllTranslations[language];

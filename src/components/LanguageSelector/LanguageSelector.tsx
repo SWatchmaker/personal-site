@@ -22,13 +22,15 @@ const LanguagesOptions: ILanguageOptionElement[] = [
 ];
 
 const LanguageSelector = (): React.ReactElement => {
-  const { setTranslation } = useContext(TranslationContext);
+  const { setTranslation, language } = useContext(TranslationContext);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(LanguagesOptions[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    LanguagesOptions.find((option) => option.code === language) ??
+      LanguagesOptions[0]
+  );
 
   const translationChangeHandler = (option: ILanguageOptionElement): void => {
-    console.log('first');
     if (!setTranslation) return;
     setSelectedOption(option);
     setTranslation(option.code);
@@ -36,11 +38,13 @@ const LanguageSelector = (): React.ReactElement => {
   };
 
   return (
-    <div className='flex flex-col items-end'>
+    <div
+      className='flex flex-col items-end'
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <button
         className='focus:ouline-none flex flex-row rounded bg-white bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-50 p-2 cursor-pointer items-center transition-colors'
         onClick={() => setIsOpen(true)}
-        // onBlur={() => setIsOpen(false)}
       >
         {selectedOption.flag}
         <FontAwesomeIcon icon={faChevronDown} className='text-xs ml-2' />

@@ -167,18 +167,12 @@ const WelcomPage = (): React.ReactElement => {
         style={{
           ['--animate-delay' as any]: '0.6s',
         }}
-        onMouseEnter={() => {
-          stopBounce();
-        }}
-        onMouseLeave={() => {
-          startBounce();
-        }}
-        onClick={() => {
-          animOut();
-        }}
-        onAnimationEnd={() => {
-          toHome();
-        }}
+        onMouseEnter={stopBounce}
+        onTouchStart={stopBounce}
+        onTouchEnd={startBounce}
+        onMouseLeave={startBounce}
+        onClick={animOut}
+        onAnimationEnd={toHome}
       >
         <span className='tracking-wide'>{welcome.button}</span>
       </div>

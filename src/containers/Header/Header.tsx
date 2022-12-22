@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import AnimatedLogo from '../../components/AnimatedLogo';
 import ContactBox from '../../components/ConctactBox/ContactBox';
+import LanguageSelector from '../../components/LanguageSelector/LanguageSelector';
 import { TranslationContext } from '../../contexts/TranslationContext';
 
 export const Header = (): React.ReactElement => {
@@ -15,6 +16,9 @@ export const Header = (): React.ReactElement => {
         <div className='flex justify-between items-center py-2'>
           <AnimatedLogo />
           <ContactBox text={header.contact} />
+        </div>
+        <div className='fixed top-20 right-4 z-50'>
+          <LanguageSelector />
         </div>
       </div>
     </header>
